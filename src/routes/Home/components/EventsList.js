@@ -77,16 +77,12 @@ export default class EventsList extends React.Component {
           day7.push(eventHTML);
       }
     });
-    let events = this.state.data;
+    let eventOnDrop = this.handleEvenet.bind(this)
     return(
       <div className="events">
-        <Day dataDay="1" content={day1} onEventDrop={this.handleEvenet.bind(this)}/>
-        <Day dataDay="2" content={day2} onEventDrop={this.handleEvenet.bind(this)}/>
-        <Day dataDay="3" content={day3} onEventDrop={this.handleEvenet.bind(this)}/>
-        <Day dataDay="4" content={day4} onEventDrop={this.handleEvenet.bind(this)}/>
-        <Day dataDay="5" content={day5} onEventDrop={this.handleEvenet.bind(this)}/>
-        <Day dataDay="6" content={day6} onEventDrop={this.handleEvenet.bind(this)}/>
-        <Day dataDay="7" content={day7} onEventDrop={this.handleEvenet.bind(this)}/>
+        {[day1, day2, day3, day4, day5, day6, day7].map(function(item, index){
+            return <Day key={index} dataDay={(index+1).toString()} content={item} onEventDrop={eventOnDrop} />
+        })}
       </div>
     );
   }
