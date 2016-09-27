@@ -1,5 +1,221 @@
-.duck {
-  display: block;
-  width: 120px;
-  margin: 1.5rem auto;
+body {
+  background: #E5E2DE url(../assets/img/background.png) 0 0 no-repeat;
 }
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+.column.over {
+  border: 2px dashed #000;
+}
+.hideEvent {
+  opacity: 0;
+}
+.column {
+  height: 150px;
+  width: 150px;
+  float: left;
+  border: 2px solid #666666;
+  background-color: #ccc;
+  margin-right: 5px;
+  -webkit-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 3px #000;
+  -ms-box-shadow: inset 0 0 3px #000;
+  box-shadow: inset 0 0 3px #000;
+  text-align: center;
+  cursor: move;
+}
+.column header {
+  color: #fff;
+  text-shadow: #000 0 1px;
+  box-shadow: 5px;
+  padding: 5px;
+  background: -moz-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+  background: -webkit-gradient(linear, left top, right top,
+                               color-stop(0, rgb(0,0,0)),
+                               color-stop(0.50, rgb(79,79,79)),
+                               color-stop(1, rgb(21,21,21)));
+  background: -webkit-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+  background: -ms-linear-gradient(left center, rgb(0,0,0), rgb(79,79,79), rgb(21,21,21));
+  border-bottom: 1px solid #ddd;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -ms-border-radius-topleft: 10px;
+  border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -ms-border-top-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-right-radius: 10px;
+}
+@font-face {
+  font-family: 'unit-thin';
+  src: url("../assets/fonts/unit-thin.eot");
+  src: url("../assets/fonts/unit-thin.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/unit-thin.woff") format("woff"), url("../assets/fonts/unit-thin.ttf") format("truetype"), url("../assets/fonts/unit-thin.svg#unit-thin") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'unit-light';
+  src: url("../assets/fonts/unit-light.eot");
+  src: url("../assets/fonts/unit-light.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/unit-light.woff") format("woff"), url("../assets/fonts/unit-light.ttf") format("truetype"), url("../assets/fonts/unit-light.svg#unit-light") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+#timer {
+  position: absolute;
+  top: 0;
+  margin-top: 33px;
+  width: 856px;
+  height: 1px;
+  background: #e86735;
+  z-index: 10;
+  transition: top 0.3s; }
+  #timer span {
+    display: block;
+    position: relative;
+    top: -8px;
+    left: 21px;
+    width: 65px;
+    height: 17px;
+    background: url(../assets/img/actual_hour.png) 0 0 no-repeat;
+    color: white;
+    font-size: 14px;
+    text-align: center; }
+
+#terminplaner {
+  position: relative;
+  top: 52px;
+  left: 270px;
+  width: 781px;
+  height: 786px;
+  background: white;
+  font-family: 'unit-light';
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.4);
+  overflow: hidden; }
+  #terminplaner * {
+    box-sizing: border-box; }
+  #terminplaner .header {
+    position: relative;
+    border-bottom: 1px solid #ebebeb; }
+    #terminplaner .header h2 {
+      font-family: 'unit-thin';
+      margin: 8px 11px 10px;
+      letter-spacing: 0.3px; }
+    #terminplaner .header .control {
+      text-align: center;
+      margin-bottom: 6px;
+      font-size: 1.1em; }
+      #terminplaner .header .control .prev, #terminplaner .header .control .next {
+        padding: 5px;
+        cursor: pointer; }
+    #terminplaner .header .month {
+      position: absolute;
+      bottom: 5px;
+      right: 6px;
+      width: 28px;
+      height: 22px;
+      background: url(../assets/img/month.png) 0 0 no-repeat;
+      cursor: pointer; }
+    #terminplaner .header .slider {
+      position: absolute;
+      top: -3px;
+      right: 6px;
+      width: 7px;
+      height: 7px;
+      background: url(../assets/img/slider.png) 0 0 no-repeat;
+      cursor: pointer; }
+  #terminplaner .table {
+    width: 781px;
+    height: 714px;
+    overflow: hidden;
+    position: relative; }
+    #terminplaner .table .events {
+      position: absolute;
+      top: 34px;
+      left: 108px;
+      width: 749px; }
+      #terminplaner .table .events .day {
+        float: left;
+        margin-right: 1px;
+        width: 106px;
+        height: 1716px; }
+    #terminplaner .table .event {
+      position: absolute;
+      width: 107px;
+      border: 1px solid white;
+      font-size: 0.75em; }
+      #terminplaner .table .event.q1 {
+        height: 33px; }
+      #terminplaner .table .event.q2 {
+        height: 66px; }
+      #terminplaner .table .event.q3 {
+        height: 99px; }
+      #terminplaner .table .event.q4 {
+        height: 132px; }
+      #terminplaner .table .event.past {
+        background: #d6ecff; }
+        #terminplaner .table .event.past .icon {
+          background-position: 0 -13px; }
+      #terminplaner .table .event.present {
+        background: #fdd466; }
+        #terminplaner .table .event.present .icon {
+          background-position: 0 0; }
+      #terminplaner .table .event.future {
+        background: #93d7fb; }
+        #terminplaner .table .event.future .icon {
+          background-position: 0 13px; }
+      #terminplaner .table .event.empty {
+        background: none;
+        border: 0; }
+      #terminplaner .table .event .hours, #terminplaner .table .event .description {
+        margin: 1px 0 0 1px; }
+      #terminplaner .table .event .icon {
+        position: absolute;
+        display: block;
+        right: 3px;
+        bottom: 4px;
+        opacity: 0.7;
+        cursor: pointer;
+        background-image: url(../assets/img/icons-sprite.png);
+        background-repeat: no-repeat;
+        width: 18px;
+        height: 13px; }
+        #terminplaner .table .event .icon:hover {
+          background-position: 0 -26px; }
+  #terminplaner table thead tr {
+    height: 33px; }
+  #terminplaner table thead td {
+    text-align: center;
+    line-height: 33px;
+    border-top: 0; }
+    #terminplaner table thead td.active {
+      background: #f2f2f2; }
+    #terminplaner table thead td.free {
+      color: rgba(0, 0, 0, 0.5); }
+  #terminplaner table tbody tr {
+    height: 132px; }
+    #terminplaner table tbody tr:nth-child(even) td.active {
+      background: #f2f2f2; }
+    #terminplaner table tbody tr:nth-child(odd) td.active {
+      background: #edecec; }
+  #terminplaner table tbody td {
+    vertical-align: top; }
+  #terminplaner table tbody .hour {
+    padding-top: 8px;
+    vertical-align: top;
+    text-align: center; }
+  #terminplaner table td {
+    border: 1px solid #ebebeb;
+    min-width: 107px; }
+    #terminplaner table td:first-of-type {
+      border-left: 0; }
+  #terminplaner table .hour {
+    font-size: 0.9em; }
