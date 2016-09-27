@@ -29,22 +29,20 @@ export default class EventsList extends React.Component {
 
   handleEvenet(id, description, pageY){
     let arr = this.state.data;
-    let hour;
-    if(pageY > 730) {
-      hour = "12:00 - 13:00";
-    } else if(pageY > 600){
-      hour = "11:00 - 12:00";
-    } else if(pageY > 470){
-      hour = "10:00 - 11:00";
-    } else if(pageY > 335){
-      hour = "09:00 - 10:00";
-    } else if(pageY <= 335){
-      hour = "08:00 - 09:00";
+    let hour = {
+      current: "",
+      position: [ 0, 335, 470, 600, 730 ],
+      description: [ "08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00" ]
     }
+    hour.description.map(function(item, index) {
+      if(pageY > hour.position[index]) {
+        hour.current = item;
+      }
+    })
     arr.forEach(function(eve, index) {
       if(eve.description === description) {
         arr[index].dataDay = id;
-        arr[index].hours = hour;
+        arr[index].hours = hour.current;
         EVENTS_DATA = arr;
       }
     });
