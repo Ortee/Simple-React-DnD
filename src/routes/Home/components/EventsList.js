@@ -51,23 +51,13 @@ export default class EventsList extends React.Component {
     this.forceUpdate();
   }
   render() {
-    let days = { 1 : [], 2: [],3: [],4: [],5: [],6: [],7: []};
+    let days = { 1 : [],2: [],3: [],4: [],5: [],6: [],7: []};
     this.state.data.forEach(function(event, index) {
       let eventHTML = <Event key={index} hours={event.hours} description={event.description}/>;
-      if(event.dataDay === "1") {
-        days[1].push(eventHTML);
-      } else   if(event.dataDay === "2") {
-          days[2].push(eventHTML);
-      } else   if(event.dataDay === "3") {
-          days[3].push(eventHTML);
-      } else   if(event.dataDay === "4") {
-          days[4].push(eventHTML);
-      } else   if(event.dataDay === "5") {
-          days[5].push(eventHTML);
-      } else   if(event.dataDay === "6") {
-          days[6].push(eventHTML);
-      } else   if(event.dataDay === "7") {
-          days[7].push(eventHTML);
+      for(var i=1; i <= 7; i++) {
+        if(event.dataDay === i.toString()) {
+          days[i].push(eventHTML);
+        }
       }
     });
     let eventOnDrop = this.handleEvenet.bind(this)
