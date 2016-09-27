@@ -7,7 +7,7 @@ export default class Event extends React.Component {
   }
 
   onDragStart(ev){
-    ev.dataTransfer.setData("draggedEvent", JSON.stringify(this.props));
+    ev.dataTransfer.setData("draggedEvent", this.props.description);
   }
 
   render() {

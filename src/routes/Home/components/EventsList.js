@@ -27,10 +27,9 @@ export default class EventsList extends React.Component {
   }
 
 
-  handleEvenet(id, event, pageY){
+  handleEvenet(id, description, pageY){
     let arr = this.state.data;
     let hour;
-    console.log("pageY",pageY);
     if(pageY > 730) {
       hour = "12:00 - 13:00";
     } else if(pageY > 600){
@@ -43,7 +42,7 @@ export default class EventsList extends React.Component {
       hour = "08:00 - 09:00";
     }
     arr.forEach(function(eve, index) {
-      if(eve.description === event.description) {
+      if(eve.description === description) {
         arr[index].dataDay = id;
         arr[index].hours = hour;
         EVENTS_DATA = arr;
@@ -52,35 +51,29 @@ export default class EventsList extends React.Component {
     this.forceUpdate();
   }
   render() {
-    let day1 = [];
-    let day2 = [];
-    let day3 = [];
-    let day4 = [];
-    let day5 = [];
-    let day6 = [];
-    let day7 = [];
+    let days = { 1 : [], 2: [],3: [],4: [],5: [],6: [],7: []};
     this.state.data.forEach(function(event, index) {
       let eventHTML = <Event key={index} hours={event.hours} description={event.description}/>;
       if(event.dataDay === "1") {
-        day1.push(eventHTML);
+        days[1].push(eventHTML);
       } else   if(event.dataDay === "2") {
-          day2.push(eventHTML);
+          days[2].push(eventHTML);
       } else   if(event.dataDay === "3") {
-          day3.push(eventHTML);
+          days[3].push(eventHTML);
       } else   if(event.dataDay === "4") {
-          day4.push(eventHTML);
+          days[4].push(eventHTML);
       } else   if(event.dataDay === "5") {
-          day5.push(eventHTML);
+          days[5].push(eventHTML);
       } else   if(event.dataDay === "6") {
-          day6.push(eventHTML);
+          days[6].push(eventHTML);
       } else   if(event.dataDay === "7") {
-          day7.push(eventHTML);
+          days[7].push(eventHTML);
       }
     });
     let eventOnDrop = this.handleEvenet.bind(this)
     return(
       <div className="events">
-        {[day1, day2, day3, day4, day5, day6, day7].map(function(item, index){
+        {[days[1], days[2], days[3], days[4], days[5], days[6], days[7]].map(function(item, index){
             return <Day key={index} dataDay={(index+1).toString()} content={item} onEventDrop={eventOnDrop} />
         })}
       </div>

@@ -13,7 +13,7 @@ export default class Day extends React.Component {
 
   onDrop(ev){
      ev.preventDefault();
-     var droppedEvent = JSON.parse(ev.dataTransfer.getData("draggedEvent"));
+     var droppedEvent = ev.dataTransfer.getData("draggedEvent");
      this.props.onEventDrop(this.props.dataDay, droppedEvent, ev.pageY);
   }
 
